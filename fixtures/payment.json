@@ -1,0 +1,38 @@
+[
+  {
+    "model": "user.payment",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "payment_date": "2024-06-11",
+      "course": 1,
+      "lesson": null,
+      "total_sum": 16000,
+      "payment_method": "Наличные"
+    }
+  },
+  {
+    "model": "user.payment",
+    "pk": 2,
+    "fields": {
+      "user": 2,
+      "payment_date": "2024-06-12",
+      "course": 2,
+      "lesson": null,
+      "total_sum": 16000,
+      "payment_method": "Наличные"
+    }
+  },
+  {
+    "model": "user.payment",
+    "pk": 3,
+    "fields": {
+      "user": 2,
+      "payment_date": "2024-07-12",
+      "course": 1,
+      "lesson": 2,
+      "total_sum": 5000,
+      "payment_method": "Без наличный"
+    }
+  }
+]
