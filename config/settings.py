@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'drf_yasg',
     'rest_framework',
     'rest_framework_simplejwt',
+    'django_celery_beat',
 
     'lms',
     'user',
@@ -116,13 +117,23 @@ SIMPLE_JWT = {
 
 STRIPE_API_KEY = os.getenv('STRIPE_API_KEY')
 
-# CORS_ALLOWED_ORIGINS = [
-#     '<http://localhost:8000>',  # Замените на адрес вашего фронтенд-сервера
-# ]
-#
-# CSRF_TRUSTED_ORIGINS = [
-#     "https://read-and-write.example.com",  # Замените на адрес вашего фронтенд-сервера
-#     # и добавьте адрес бэкенд-сервера
-# ]
-#
-# CORS_ALLOW_ALL_ORIGINS = False
+
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379/0'
+CELERY_BACKEND_URL = 'redis://127.0.0.1:6379/0'
+CELERY_BEAT_SCHEDULE = {
+    'send reminder': {
+        'task': 'user.tasks.check_last_login',
+        'schedule': timedelta(seconds=10),
+    },
+}
+
+EMAIL_HOST = os.getenv("EMAIL_HOST")
+EMAIL_PORT = os.getenv("EMAIL_PORT")
+EMAIL_USE_SSL = os.getenv("EMAIL_USE_SSL", False) == "True"
+EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS", True) == "False"
+
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER_MAIL")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD_MAIL")
+
+SERVER_EMAIL = EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
